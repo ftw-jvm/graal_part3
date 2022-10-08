@@ -24,6 +24,17 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>HelloPolyglot</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.graalvm.buildtools</groupId>
                 <artifactId>native-maven-plugin</artifactId>
                 <version>${native.maven.plugin.version}</version>
@@ -46,7 +57,10 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
                 </executions>
                 <configuration>
                     <buildArgs>
-                        <arg>--language:ruby</arg>
+                        <arg>--language:js</arg>
+                        <arg>-H:DashboardDump=hello</arg>
+                        <arg>-H:+DashboardAll</arg>
+                        <arg>-Ob</arg>
                     </buildArgs>
                     <mainClass>${exec.mainClass}</mainClass>
                 </configuration>
